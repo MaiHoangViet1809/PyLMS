@@ -70,6 +70,10 @@ async def create_loan(req_body: str):
 
 
 async def disb_loan(req_body: str):
+    # mandatory step
+    start_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+
+    # main process
     contract = base(json_data=req_body)
     contract.unlock()
 
@@ -95,6 +99,10 @@ async def disb_loan(req_body: str):
     # commit
     contract.next_stage = None
     contract.contract_info = contract_detail
+    contract.status_history = await update_history(dict_body=json.loads(req_body),
+                                                   stage='create_loan',
+                                                   start_time=start_time)
+
     contract.is_dirty = True
     response_msg = await contract.commit()
 
