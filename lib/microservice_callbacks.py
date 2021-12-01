@@ -100,7 +100,7 @@ async def disb_loan(req_body: str):
     contract.next_stage = None
     contract.contract_info = contract_detail
     contract.status_history = await update_history(dict_body=json.loads(req_body),
-                                                   stage='create_loan',
+                                                   stage='disb_loan',
                                                    start_time=start_time)
 
     contract.is_dirty = True
