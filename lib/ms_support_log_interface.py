@@ -18,6 +18,7 @@ app = FastAPI(title='kafka log streaming')
 
 app.secret_key = uuid.uuid4().hex
 
+# CORS (Cross-Origin Resource Sharing)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
